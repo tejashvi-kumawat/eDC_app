@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 import { getUserStartups } from '../../api/startups.jsx';
 import StartupCard from '../../components/StartupCard/StartupCard.jsx';
 import { styles } from '../../styles/styles.jsx';
 
-const Dashboard = ({ currentUser, setCurrentPage }) => {
+const Dashboard = ({ currentUser }) => {
   const [userStartups, setUserStartups] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!currentUser || !currentUser.id) {
@@ -40,10 +42,10 @@ const Dashboard = ({ currentUser, setCurrentPage }) => {
     <div style={styles.page}>
       <div style={styles.dashboard}>
         <div style={styles.dashboardHeader}>
-          <h2>Welcome, {currentUser.username}!</h2>
+          <h2>Welcome, {currentUser?.username || 'User'}!</h2>
           <button 
             style={styles.primaryBtn}
-            onClick={() => setCurrentPage('create-startup')}
+            onClick={() => navigate('/create-startup')}
           >
             <Plus size={16} />
             Create Startup Profile
