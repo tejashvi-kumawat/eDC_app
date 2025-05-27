@@ -11,7 +11,7 @@ const PublicStartupsPage = () => {
     const fetchStartups = async () => {
       try {
         const response = await getPublicStartups();
-        const data = response.results || response; // for paginated or flat arrays
+        const data = response.results || response; 
         setStartups(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error fetching public startups:', error);

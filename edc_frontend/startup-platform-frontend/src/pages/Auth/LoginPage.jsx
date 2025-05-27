@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // ✅ import navigate
+import { useNavigate } from 'react-router-dom';
 import { login } from '../../api/auth';
 import { styles } from '../../styles/styles';
 
@@ -10,7 +10,7 @@ const LoginPage = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate(); // ✅ initialize navigation
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,8 +19,7 @@ const LoginPage = ({ onLogin }) => {
 
     try {
       const response = await login(formData.username, formData.password);
-      onLogin(response.user); // This sets currentUser in App.jsx
-      // ✅ Redirect based on role
+      onLogin(response.user); 
       navigate(response.user.role === 'admin' ? '/admin' : '/dashboard');
     } catch (error) {
       setError(error.response?.data?.error || 'Invalid credentials');
@@ -72,7 +71,7 @@ const LoginPage = ({ onLogin }) => {
           Don't have an account?{' '}
           <button
             style={{ ...styles.navLink, padding: 0 }}
-            onClick={() => navigate('/register')} // ✅ replaced setCurrentPage
+            onClick={() => navigate('/register')} 
           >
             Register here
           </button>
